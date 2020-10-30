@@ -26,39 +26,39 @@ module.exports = function (loopbackApplication, options) {
     debug('loginCallback: ', JSON.stringify(loginOk));
   }
 
-  loopbackApplication.all('/cas', function(req, res, next) {
+  loopbackApplication.all('/api/cas', function(req, res, next) {
     debug('/cas')
     let q = querystring.stringify(req.query)
     q = q.length==0?'':'?'+q
-    res.redirect('/cas/login' + q)
+    res.redirect('/api/cas/login' + q)
   })
 
-  loopbackApplication.all('/cas/login', function(req, res, next) {
+  loopbackApplication.all('/api/cas/login', function(req, res, next) {
     debug('/cas/login')
     login(loopbackApplication, options, req, res, next)
   })
 
-  loopbackApplication.get('/cas/logout', function(req, res, next) {
+  loopbackApplication.get('/api/cas/logout', function(req, res, next) {
     debug('/cas/logout')
     logout(loopbackApplication, options, req, res, next)
   })
 
-  loopbackApplication.get('/cas/validate', function(req, res, next) {
+  loopbackApplication.get('/api/cas/validate', function(req, res, next) {
     debug('/cas/validate')
     p1Validate(loopbackApplication, options, req, res, next, loginCallback)
   })
 
-  loopbackApplication.get('/cas/serviceValidate', function(req, res, next) {
+  loopbackApplication.get('/api/cas/serviceValidate', function(req, res, next) {
     debug('/cas/serviceValidate')
     p23Validate(loopbackApplication, options, req, res, next, loginCallback, false)
   })
 
-  loopbackApplication.get('/cas/p3/serviceValidate', function(req, res, next) {
+  loopbackApplication.get('/api/cas/p3/serviceValidate', function(req, res, next) {
     debug('/cas/p3/serviceValidate')
     p23Validate(loopbackApplication, options, req, res, next, loginCallback, true)
   })
 
-  loopbackApplication.post('/cas/samlValidate', function(req, res, next) {
+  loopbackApplication.post('/api/cas/samlValidate', function(req, res, next) {
     debug('/cas/samlValidate')
     samlValidate(loopbackApplication, options, req, res, next, loginCallback)
   })

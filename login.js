@@ -53,10 +53,10 @@ function loginGet(app, config, req, res, next, URLserviceUrl, service) {
       eval('app.models.' + config.userModel).logout(req.accessToken.id,next)
     }
     // auth
-    let encode = encodeURIComponent(app.get('accessUrl') + "/cas/login?service=" + URLserviceUrl.href)
-    let q = getQueries(req)
-    q = q.length==0?'':'&'+q
-    return res.redirect(config.loginPage + "?redirect=" + encode + q)
+    // let encode = encodeURIComponent(app.get('accessUrl') + "/cas/login?service=" + URLserviceUrl.href)
+    // let q = getQueries(req)
+    // q = q.length==0?'':'&'+q
+    return res.redirect(config.accessUrl + config.loginPage + "?service=" + encodeURIComponent(URLserviceUrl.href))
   }
 }
 
